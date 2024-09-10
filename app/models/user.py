@@ -23,7 +23,6 @@ class User(Base):
                f"email={self.email}, " \
                f"username={self.username}, " \
                f"registered_at={self.registered_at}, " \
-               f"hashed_password={self.hashed_password}, " \
                f"is_active={self.is_active}, " \
                f"is_superuser={self.is_superuser}, " \
                f"is_verified={self.is_verified}" \

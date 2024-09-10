@@ -1,9 +1,16 @@
-from typing import AsyncGenerator
-
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, \
+from sqlalchemy.ext.asyncio import (
+    AsyncSession,
+    create_async_engine,
     async_sessionmaker
+)
 
-from app.constants.config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
+from app.utils.constants.config import (
+    DB_HOST,
+    DB_NAME,
+    DB_PASS,
+    DB_PORT,
+    DB_USER,
+)
 
 
 class DBConnection:
@@ -20,6 +27,6 @@ class DBConnection:
             expire_on_commit=False
         )
 
-    async def get_session(self) -> AsyncGenerator[AsyncSession, None]:
-        async with self.async_session_maker() as session:
-            yield session
+    # Исправлено: метод теперь возвращает сессию напрямую
+    def get_session(self) -> AsyncSession:
+        return self.async_session_maker()

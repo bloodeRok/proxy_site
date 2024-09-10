@@ -11,3 +11,4 @@ DB_PORT = os.environ.get("DB_PORT")
 DB_NAME = os.environ.get("DB_NAME")
 
 SECRET = os.environ.get("SECRET")
+ALGORITHM = os.environ.get("ALGORITHM")

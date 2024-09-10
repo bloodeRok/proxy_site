@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from app.constants.config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
+from app.utils.constants.config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 from app.models import Base
 
 # this is the Alembic Config object, which provides

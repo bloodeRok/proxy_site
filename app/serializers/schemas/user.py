@@ -14,6 +14,11 @@ class UserCreateSchema(BaseModel):
     is_verified: bool = UserFields.is_verified
 
 
+class UserLoginSchema(BaseModel):
+    email: str = UserFields.email
+    password: str = UserFields.password
+
+
 class UserReadSchema(BaseModel):
     id: int = UserFields.id
     email: str = UserFields.email

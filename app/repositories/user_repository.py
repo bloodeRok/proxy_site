@@ -12,29 +12,29 @@ class UserRepository:
         self.session_maker = DBConnection().get_session
 
     async def create(
-        self,
-        email: str,
-        username: str,
-        hashed_password: str,
-        is_active: bool,
-        is_superuser: bool,
-        is_verified: bool,
+            self,
+            email: str,
+            username: str,
+            hashed_password: str,
+            is_active: bool,
+            is_superuser: bool,
+            is_verified: bool,
+            session: AsyncSession
     ) -> User:
-        async with self.session_maker() as session:
-            created_user = self.model(
-                email=email,
-                username=username,
-                hashed_password=hashed_password,
-                is_active=is_active,
-                is_superuser=is_superuser,
-                is_verified=is_verified,
-            )
+        created_user = self.model(
+            email=email,
+            username=username,
+            hashed_password=hashed_password,
+            is_active=is_active,
+            is_superuser=is_superuser,
+            is_verified=is_verified,
+        )
 
-            session.add(created_user)
-            await session.commit()
-            await session.refresh(created_user)
+        session.add(created_user)
+        await session.commit()
+        await session.refresh(created_user)
 
-            return created_user
+        return created_user
 
     @staticmethod
     async def get_by_email(email: str, session: AsyncSession) -> Optional[User]:

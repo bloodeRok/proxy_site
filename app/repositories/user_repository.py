@@ -20,7 +20,6 @@ class UserRepository:
         is_superuser: bool,
         is_verified: bool,
     ) -> User:
-        # Получаем сессию через async with
         async with self.session_maker() as session:
             created_user = self.model(
                 email=email,

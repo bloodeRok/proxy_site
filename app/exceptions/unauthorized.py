@@ -17,3 +17,23 @@ class UserUnauthorized(Unauthorized):
 class UserWrongCredentials(Unauthorized):
     def __init__(self) -> None:
         super().__init__(detail="Wrong credentials.")
+
+
+class NotFoundAccessToken(Unauthorized):
+    def __init__(self) -> None:
+        super().__init__(detail="Access token not found.")
+
+
+class InvalidToken(Unauthorized):
+    def __init__(self) -> None:
+        super().__init__(detail="Invalid token.")
+
+
+class ExpiredToken(Unauthorized):
+    def __init__(self) -> None:
+        super().__init__(detail="Expired token.")
+
+
+class NotUserIDToken(Unauthorized):
+    def __init__(self) -> None:
+        super().__init__(detail="User id not found in token.")

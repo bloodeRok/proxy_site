@@ -40,3 +40,8 @@ class UserRepository:
     async def get_by_email(email: str, session: AsyncSession) -> Optional[User]:
         result = await session.execute(select(User).where(User.email == email))
         return result.scalars().first()
+
+    @staticmethod
+    async def get_by_id(user_id: int, session: AsyncSession) -> Optional[User]:
+        result = await session.execute(select(User).where(User.id == user_id))
+        return result.scalars().first()

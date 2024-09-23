@@ -1,4 +1,4 @@
-from fastapi import Response
+from fastapi import Response, Depends
 
 from app.exceptions import UserConflict, UserNotFound
 from app.exceptions.unauthorized import UserWrongCredentials
@@ -7,6 +7,7 @@ from app.repositories import UserRepository
 from app.serializers.schemas import UserCreateSchema, UserLoginSchema
 from app.utils.auth.helpers import get_password_hash, verify_password
 from app.utils.auth.jwt_manager import JWTManager
+from app.utils.constants.defaults import JWT_NAME
 
 
 class UserService:
@@ -58,8 +59,22 @@ class UserService:
             data={"user_id": user.id}
         )
         response.set_cookie(
-            key="access_token",
+            key=JWT_NAME,
             value=access_token,
             httponly=True
         )
+        return user
+
+    async def get_current_user(
+            self,
+            user_id=Depends(JWTManager().get_user_id)
+    ) -> User:
+        async with self.repository.session_maker() as session:
+            user = await self.repository.get_by_id(
+                user_id=user_id,
+                session=session
+            )
+
+        if not user:
+            raise UserNotFound()
         return user

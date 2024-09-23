@@ -29,4 +29,4 @@ class UserReadSchema(BaseModel):
     is_verified: bool = UserFields.is_verified
 
     class Config:
-        orm_mode = True
+        from_attributes = True

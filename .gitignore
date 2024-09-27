@@ -1,3 +1,6 @@
 .env
 .venv
 .idea
+all_log_1.xlsx
+all_log_2.xlsx
+test.py

@@ -17,7 +17,7 @@ class Request(Base):
     module = Column(String, nullable=False)
 
     def __repr__(self):
-        return f"<User(" \
+        return f"<Request(" \
                f"id={self.id}, " \
                f"date={self.date}, " \
                f"inn={self.inn}," \
